@@ -1,0 +1,22 @@
+##
+# @package     selectwizard
+# @filesource  services.yml
+# @version     1.0.0
+# @since       14.02.2020 - 10:26
+# @author      Patrick Froch <info@easySolutionsIT.de>
+# @link        http://easySolutionsIT.de
+# @copyright   e@sy Solutions IT 2020
+# @license     LGPLv3
+##
+
+# Services
+services:
+
+    ##
+    # Hanlder
+    ##
+    esit_selectwizard.services.asset_handler:
+        class: Esit\Selectwizard\Classes\Services\AssetHandler
+
+    esit_selectwizard.services.select_handler:
+        class: Esit\Selectwizard\Classes\Services\SelectHandler

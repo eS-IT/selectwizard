@@ -1,0 +1,36 @@
+{
+    "name": "esit/selectwizard",
+    "description": "Es handelt sich um eine Erweiterung für das [Open Source CMS Contao](https://contao.org). Sie stellt ein Widget für das Backend zur Verfügung, welches dem ListWizard sehr änhlich ist. Der ListWizard bestehtaus einer beliebigen Anzahl an Textfeldern. Hier werden stattdessen Auswahlfelder verwendet. So ist es möglich den Nutzern ohne großen Aufwand eine Auswahlmöglichkeit von beliebig vielen Elementen anzubieten.",
+    "license": "LGPL-3.0-only",
+    "type": "contao-bundle",
+    "authors": [
+        {
+            "name": "Patrick Froch",
+            "email": "info@easySolutionsIT.de",
+            "homepage": "http://easySolutionsIT.de",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "info@easySolutionsIT.de"
+    },
+    "require": {
+        "php": "~7.2",
+        "contao/core-bundle": "~4.4",
+        "contao/manager-bundle": "~4.4.0",
+        "contao/conflicts": "@dev"
+    },
+    "require-dev": {
+        "contao/test-case": "^3.0",
+        "roave/security-advisories": "dev-master",
+        "phpunit/phpunit": "^8.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Esit\\Selectwizard\\": ""
+        }
+    },
+    "extra": {
+        "contao-manager-plugin": "Esit\\Selectwizard\\Classes\\Contao\\Manager\\Plugin"
+    }
+}
