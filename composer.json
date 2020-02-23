@@ -1,6 +1,6 @@
 {
     "name": "esit/selectwizard",
-    "description": "Es handelt sich um eine Erweiterung für das [Open Source CMS Contao](https://contao.org). Sie stellt ein Widget für das Backend zur Verfügung, welches dem ListWizard sehr änhlich ist. Der ListWizard bestehtaus einer beliebigen Anzahl an Textfeldern. Hier werden stattdessen Auswahlfelder verwendet. So ist es möglich den Nutzern ohne großen Aufwand eine Auswahlmöglichkeit von beliebig vielen Elementen anzubieten.",
+    "description": "Es handelt sich bei dieser Erweiterung für das Open Source CMS Contao um ein Backend Widget, dass eine variable Liste an Auswahlfeldern zur Verfügung stellt.",
     "license": "LGPL-3.0-only",
     "type": "contao-bundle",
     "authors": [
