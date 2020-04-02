@@ -14,3 +14,4 @@ runtests:
     script:
         - cd /htdocs/vendor/esit/$PROJECT_NAME/
         - ./build/runtests.sh
+    coverage: '/Methods: \d+\.\d+/'

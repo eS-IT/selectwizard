@@ -1,3 +1,5 @@
-Current ChangesChanged: Requirements to Contao 4.9
+1.0.2
+Close #1 - Readme verbessern
+Changed: Requirements to Contao 4.9
 1.0.1Changed: easysolutionsit/contao-testsuite:1.0.2 to easysolutionsit/contao-testsuite:1.0.7
 1.0.0Initialer Commit
