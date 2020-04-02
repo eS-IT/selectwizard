@@ -150,9 +150,9 @@ class OnGenerateWidgetListenerTest extends EsitTestCase
         $event->setMscLang(['Language']);
         $listener->addDataToTemplate($event);
         $template = $event->getTemplate();
-        $this->assertEquals('testfield_list', $template->strId);
-        $this->assertEquals('testfield', $template->label);
-        $this->assertEquals(['Language'], $template->lang);
+        $this->assertSame('testfield_list', $template->strId);
+        $this->assertSame('testfield', $template->label);
+        $this->assertSame(['Language'], $template->lang);
     }
 
 
@@ -182,6 +182,6 @@ class OnGenerateWidgetListenerTest extends EsitTestCase
 
         $event->setTemplate($template);
         $listener->parseOutput($event);
-        $this->assertEquals('output', $event->getOutput());
+        $this->assertSame('output', $event->getOutput());
     }
 }

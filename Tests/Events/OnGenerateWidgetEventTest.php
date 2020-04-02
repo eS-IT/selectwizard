@@ -26,6 +26,6 @@ class OnGenerateWidgetEventTest extends EsitTestCase
     {
         $event = new OnGenerateWidgetEvent();
         $event->setConfiguration(['config']);
-        $this->assertEquals(['config'], $event->getConfiguration());
+        $this->assertSame(['config'], $event->getConfiguration());
     }
 }

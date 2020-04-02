@@ -49,7 +49,7 @@ class AssetHandlerTest extends EsitTestCase
         $assetHandler       = new AssetHandler();
         $GLOBALS[$type][]   = $path;
         $assetHandler->insertAsset($path, $type);
-        $this->assertEquals(1, \count($GLOBALS[$type]));
+        $this->assertSame(1, \count($GLOBALS[$type]));
     }
 
     public function testInsertAssetSetPathIfPathAndTypeAreSet(): void
@@ -59,6 +59,6 @@ class AssetHandlerTest extends EsitTestCase
         $assetHandler       = new AssetHandler();
         unset($GLOBALS[$type]);
         $assetHandler->insertAsset($path, $type);
-        $this->assertEquals($GLOBALS[$type][0], $path);
+        $this->assertSame($GLOBALS[$type][0], $path);
     }
 }

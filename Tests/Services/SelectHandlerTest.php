@@ -32,7 +32,7 @@ class SelectHandlerTest extends EsitTestCase
         ];
         $cssId          = 'TestID';
         $value          = null;
-        $expected       = '<select name="TestID[]" id="ctrl_TestID[]" class="tl_select selectmenuwizard" ';
+        $expected       = '<select name="TestID[]" id="ctrl_TestID" class="tl_select selectmenuwizard" ';
         $expected      .= 'onfocus="Backend.getScrollOffset()">';
         $expected      .= '<option value="test01">Test 01</option>';
         $expected      .= '<option value="test02">Test 02</option>';
@@ -40,7 +40,7 @@ class SelectHandlerTest extends EsitTestCase
         $selectHandler  = new SelectHandler();
         $rtn            = $selectHandler->createSelect($cssId, $config, $value);
 
-        $this->assertEquals($expected, $rtn);
+        $this->assertSame($expected, $rtn->generateWithError());
     }
 
     public function testCreateSelectGeneratesASelectMenuAndSetTheValue(): void
@@ -53,7 +53,7 @@ class SelectHandlerTest extends EsitTestCase
         ];
         $cssId          = 'TestID';
         $value          = 'test01';
-        $expected       = '<select name="TestID[]" id="ctrl_TestID[]" class="tl_select selectmenuwizard" ';
+        $expected       = '<select name="TestID[]" id="ctrl_TestID" class="tl_select selectmenuwizard" ';
         $expected      .= 'onfocus="Backend.getScrollOffset()">';
         $expected      .= '<option value="test01" selected>Test 01</option>';
         $expected      .= '<option value="test02">Test 02</option>';
@@ -61,6 +61,6 @@ class SelectHandlerTest extends EsitTestCase
         $selectHandler  = new SelectHandler();
         $rtn            = $selectHandler->createSelect($cssId, $config, $value);
 
-        $this->assertEquals($expected, $rtn);
+        $this->assertSame($expected, $rtn->generateWithError());
     }
 }

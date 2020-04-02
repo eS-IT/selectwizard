@@ -23,23 +23,23 @@ class SelectHandler
 
     /**
      * Erzeugt die einzelnen Auswahlfelder.
-     * @param  string $cssId
-     * @param  array  $config
-     * @param  null   $value
-     * @return string
+     * @param  string     $cssId
+     * @param  array      $config
+     * @param  null       $value
+     * @return SelectMenu
      */
-    public function createSelect(string $cssId, array $config, $value = null): string
+    public function createSelect(string $cssId, array $config, $value = null): SelectMenu
     {
         $select         = new SelectMenu();
         $select->addAttributes($config);
         $select->name   = $cssId . '[]';
-        $select->id     = $cssId . '[]';
+        $select->id     = $cssId;
         $select->class  = 'selectmenuwizard';
 
         if (!empty($value)) {
             $select->value = $value;
         }
 
-        return $select->generateWithError();
+        return $select;
     }
 }

@@ -15,7 +15,7 @@
         <?php foreach($this->selectBoxes as $select): ?>
 
             <li>
-                <?= $select; ?>
+                <?= $select->generateWithError(); ?>
                 <button type="button" data-command="copy" title="<?= StringUtil::specialchars($this->lang['lw_copy']); ?>"><?= Image::getHtml('copy.svg'); ?></button>
                 <button type="button" data-command="delete" title="<?= StringUtil::specialchars($this->lang['lw_delete']); ?>"><?= Image::getHtml('delete.svg'); ?></button>
                 <button type="button" class="drag-handle" title="<?= StringUtil::specialchars($this->lang['move']); ?>" aria-hidden="true"><?= Image::getHtml('drag.svg'); ?></button>

@@ -1,3 +1,5 @@
+1.0.4
+Close #3 - Listener  für initiale Erstellung des Widgets wird nicht benötigt
 1.0.3
 Close #2 - Add coverage to gitlab-ci.yml
 1.0.2
