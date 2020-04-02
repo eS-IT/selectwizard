@@ -91,23 +91,7 @@ class OnGenerateWidgetListener
             foreach ($values as $value) {
                 $selects[] = $this->selectHandler->createSelect($id, $config, $value);
             }
-        }
-
-        $event->setSelects($selects);
-    }
-
-
-    /**
-     * Erstellt das Initiale Widget, wenn noch keine Werte vorhanden sind.
-     * @param OnGenerateWidgetEvent $event
-     */
-    public function generateInitialWidget(OnGenerateWidgetEvent $event): void
-    {
-        $selects    = $event->getSelects();
-        $id         = $event->getFieldId();
-        $config     = $event->getConfiguration();
-
-        if (empty($selects)) {
+        } else {
             $selects[] = $this->selectHandler->createSelect($id, $config);
         }
 

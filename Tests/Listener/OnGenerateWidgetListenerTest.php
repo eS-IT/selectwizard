@@ -74,13 +74,15 @@ class OnGenerateWidgetListenerTest extends EsitTestCase
     }
 
 
-    public function testGenerateWidgetsDoNothingIfValuesAreEmpty(): void
+    public function testGenerateWidgetsCallsCreateSelectWithoutValueIfValuesAreEmpty(): void
     {
         $ah         = $this->getMockBuilder(AssetHandler::class)->onlyMethods(['insertAsset'])->getMock();
         $sh         = $this->getMockBuilder(SelectHandler::class)->onlyMethods(['createSelect'])->getMock();
-        $sh->expects($this->never())->method('createSelect');
+        $sh->expects($this->once())->method('createSelect')->with('test', ['test']);
         $listener   = new OnGenerateWidgetListener($ah, $sh);
         $event      = new OnGenerateWidgetEvent();
+        $event->setFieldId('test');
+        $event->setConfiguration(['test']);
         $listener->generateWidgets($event);
     }
 
@@ -95,30 +97,6 @@ class OnGenerateWidgetListenerTest extends EsitTestCase
         $event      = new OnGenerateWidgetEvent();
         $event->setValues($values);
         $listener->generateWidgets($event);
-    }
-
-
-    public function testGenerateInitialWidgetGenerateWidgetIfWidgetsAreEmpty(): void
-    {
-        $ah         = $this->getMockBuilder(AssetHandler::class)->onlyMethods(['insertAsset'])->getMock();
-        $sh         = $this->getMockBuilder(SelectHandler::class)->onlyMethods(['createSelect'])->getMock();
-        $sh->expects($this->once())->method('createSelect');
-        $listener   = new OnGenerateWidgetListener($ah, $sh);
-        $event      = new OnGenerateWidgetEvent();
-        $listener->generateInitialWidget($event);
-    }
-
-
-    public function testGenerateInitialWidgetDoNothingIfThereAreAlreadyWidgets(): void
-    {
-        $selects    = ['DummyForWidget'];
-        $ah         = $this->getMockBuilder(AssetHandler::class)->onlyMethods(['insertAsset'])->getMock();
-        $sh         = $this->getMockBuilder(SelectHandler::class)->onlyMethods(['createSelect'])->getMock();
-        $sh->expects($this->never())->method('createSelect');
-        $listener   = new OnGenerateWidgetListener($ah, $sh);
-        $event      = new OnGenerateWidgetEvent();
-        $event->setSelects($selects);
-        $listener->generateInitialWidget($event);
     }
 
 

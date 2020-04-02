@@ -33,12 +33,6 @@ services:
         tags:
             - { name: kernel.event_listener, event: on.generate.widget.event, method: generateWidgets, priority: 5120 }
 
-    esit_selectwizard.listener.on_generate_widget_listener.generate_initial_widget:
-        class: Esit\Selectwizard\Classes\Listener\OnGenerateWidgetListener
-        arguments: ["@esit_selectwizard.services.asset_handler", "@esit_selectwizard.services.select_handler"]
-        tags:
-            - { name: kernel.event_listener, event: on.generate.widget.event, method: generateInitialWidget, priority: 4096 }
-
     esit_selectwizard.listener.on_generate_widget_listener.create_template:
         class: Esit\Selectwizard\Classes\Listener\OnGenerateWidgetListener
         arguments: ["@esit_selectwizard.services.asset_handler", "@esit_selectwizard.services.select_handler"]
