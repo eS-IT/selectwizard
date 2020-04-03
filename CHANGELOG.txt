@@ -1,3 +1,6 @@
+1.0.5
+Close #5 - In den Tests assertEquals durch assertSame ersetzen
+Close #4 - Der SelectHandler sollte Widgets statt String zurückgeben
 1.0.4
 Close #3 - Listener  für initiale Erstellung des Widgets wird nicht benötigt
 1.0.3
