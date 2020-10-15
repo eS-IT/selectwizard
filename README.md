@@ -2,7 +2,7 @@
 
 [![LGPLv3](https://img.shields.io/badge/license-LGPLv3-blue)](https://choosealicense.com/licenses/gpl-3.0/) [![PHP >7.2](https://img.shields.io/badge/PHP%3A-%20%3E7.2.0-blue)](https://www.php.net/downloads.php#v7.2.27) [![Contao >4.9](https://img.shields.io/badge/Contao%3A-%3E=%204.9.0-orange)](https://github.com/contao/contao/tree/4.9)
 
-Es handelt sich bei dieser Erweiterung für das [Open Source CMS Contao](https://contao.org) um ein Backend Widget, dass dem `listWizard` sehr ähnlich ist. Manchmal benötigt man eine Möglichkeit, den Nutzer aus einer bestimmten Anzahl von Optionen beliebig viele auswählen zu laseen. Diese Erweiterung stellt zu diesem Zweck das Widget `selectmenuWizard` zur Verfügung. Es handlet sich hierbei im eine variable Liste an Auswahlfeldern.
+Es handelt sich bei dieser Erweiterung für das [Open Source CMS Contao](https://contao.org) um ein Backend-Widget, das dem `listWizard` sehr ähnlich ist. Manchmal benötigt man eine Möglichkeit, dem Nutzer aus einer bestimmten Anzahl von Optionen beliebig viele auswählen zu lassen. Diese Erweiterung stellt zu diesem Zweck das Widget `selectmenuWizard` zur Verfügung. Es handlet sich hierbei um eine variable Liste an Auswahlfeldern.
 
 Die Erweiterung richtet sich an Entwickler, da die Felder im DCA definiert werden müssen. Es können die gängigen Einstellungen vorgenommen werden, die Contao für das DCA vorsieht.
 
@@ -43,7 +43,7 @@ $GLOBALS['TL_DCA'][$table]['fields']['testfield'] = [
 
 __Einschränkungen:__
 
-- `submitOnChange` funktioniert nicht, macht aber auch wenig Sinn, da dies hauptsächliche für Subpaletten o.ä. wichtig ist. Diese können hier aber nicht verwender werden, da es nicht nur einen Wert gibt.
+- `submitOnChange` funktioniert nicht, macht aber auch wenig Sinn, da dies hauptsächliche für Subpaletten o.ä. wichtig ist. Diese können hier aber nicht verwendet werden, da es nicht nur einen Wert gibt.
 
 ### Ausgabe
 

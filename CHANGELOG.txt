@@ -1,12 +1,22 @@
+1.0.6
+Close #6 - Als Abhängigkeit wieder Contao 4.4 eintragen
+
 1.0.5
 Close #5 - In den Tests assertEquals durch assertSame ersetzen
 Close #4 - Der SelectHandler sollte Widgets statt String zurückgeben
+
 1.0.4
 Close #3 - Listener  für initiale Erstellung des Widgets wird nicht benötigt
+
 1.0.3
 Close #2 - Add coverage to gitlab-ci.yml
+
 1.0.2
 Close #1 - Readme verbessern
 Changed: Requirements to Contao 4.9
-1.0.1Changed: easysolutionsit/contao-testsuite:1.0.2 to easysolutionsit/contao-testsuite:1.0.7
-1.0.0Initialer Commit
+
+1.0.1
+Changed: easysolutionsit/contao-testsuite:1.0.2 to easysolutionsit/contao-testsuite:1.0.7
+
+1.0.0
+Initialer Commit
