@@ -47,7 +47,7 @@ __Einschränkungen:__
 
 ### Ausgabe
 
- ![Ausgabe](https://easySolutionsIT.de/selectboxwizard_output.png)
+ ![Ausgabe](https://github.com/eS-IT/selectwizard/blob/master/selectboxwizard_output.png?raw=true "Ausgabe")
 
 
 ## Running the tests
