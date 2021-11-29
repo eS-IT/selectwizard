@@ -27,9 +27,13 @@ class AssetHandlerTest extends EsitTestCase
         $type           = '';
         $path           = '/tmp';
         $assetHandler   = new AssetHandler();
-        unset($GLOBALS[$type]);
+
+        if (isset($GLOBALS[$type])) {
+            unset($GLOBALS[$type]);
+        }
+
         $assetHandler->insertAsset($path, $type);
-        $this->assertEmpty($GLOBALS[$type]);
+        $this->assertArrayNotHasKey($type, $GLOBALS);
     }
 
     public function testInsertAssetDoNothingIfPathIsEmpty(): void
@@ -37,9 +41,13 @@ class AssetHandlerTest extends EsitTestCase
         $type           = 'TL_CSS';
         $path           = '';
         $assetHandler   = new AssetHandler();
-        unset($GLOBALS[$type]);
+
+        if (isset($GLOBALS[$type])) {
+            unset($GLOBALS[$type]);
+        }
+
         $assetHandler->insertAsset($path, $type);
-        $this->assertEmpty($GLOBALS[$type]);
+        $this->assertArrayNotHasKey($type, $GLOBALS);
     }
 
     public function testInsertAssetDoNothingIfPathIsAlreadySet(): void
@@ -49,7 +57,7 @@ class AssetHandlerTest extends EsitTestCase
         $assetHandler       = new AssetHandler();
         $GLOBALS[$type][]   = $path;
         $assetHandler->insertAsset($path, $type);
-        $this->assertSame(1, \count($GLOBALS[$type]));
+        $this->assertCount(1, $GLOBALS[$type]);
     }
 
     public function testInsertAssetSetPathIfPathAndTypeAreSet(): void
@@ -57,7 +65,11 @@ class AssetHandlerTest extends EsitTestCase
         $type               = 'TL_CSS';
         $path               = '/tmp';
         $assetHandler       = new AssetHandler();
-        unset($GLOBALS[$type]);
+
+        if (isset($GLOBALS[$type])) {
+            unset($GLOBALS[$type]);
+        }
+
         $assetHandler->insertAsset($path, $type);
         $this->assertSame($GLOBALS[$type][0], $path);
     }

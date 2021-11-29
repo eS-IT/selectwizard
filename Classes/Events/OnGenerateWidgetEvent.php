@@ -12,7 +12,7 @@
 namespace Esit\Selectwizard\Classes\Events;
 
 use Contao\BackendTemplate;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class OnGenerateWidgetEvent

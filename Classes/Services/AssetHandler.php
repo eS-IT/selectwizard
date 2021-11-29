@@ -26,9 +26,9 @@ class AssetHandler
      */
     public function insertAsset(string $path, string $type): void
     {
-        if (!empty($path) &&
-            !empty($type) &&
+        if (!empty($path) && !empty($type) &&
             (
+                !\array_key_exists($type, $GLOBALS) ||
                 !\is_array($GLOBALS[$type]) ||
                 !\in_array($path, $GLOBALS[$type], true)
             )

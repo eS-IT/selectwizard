@@ -15,15 +15,14 @@
         "email": "info@easySolutionsIT.de"
     },
     "require": {
-        "php": "~7.2",
+        "php": "^7.4||^8.0",
         "contao/core-bundle": "^4.4",
         "contao/manager-bundle": "^4.4",
         "contao/conflicts": "@dev"
     },
     "require-dev": {
-        "contao/test-case": "^3.0",
-        "roave/security-advisories": "dev-master",
-        "phpunit/phpunit": "^8.4"
+        "contao/test-case": "^4.5",
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {
