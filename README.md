@@ -1,6 +1,6 @@
 # SelectWizard
 
-[![LGPLv3](https://img.shields.io/badge/license-LGPLv3-blue)](https://choosealicense.com/licenses/gpl-3.0/) [![PHP >7.4](https://img.shields.io/badge/PHP%3A-%20%3E7.2.0-blue)](https://www.php.net/downloads.php#v7.4.26) [![Contao >4.9](https://img.shields.io/badge/Contao%3A-%3E=%204.9.0-orange)](https://github.com/contao/contao/tree/4.9)
+[![LGPLv3](https://img.shields.io/badge/license-LGPLv3-blue)](https://choosealicense.com/licenses/gpl-3.0/) [![PHP >7.4](https://img.shields.io/badge/PHP%3A-%20%3E7.4.0-blue)](https://www.php.net/downloads.php#v7.4.26) [![Contao >4.9](https://img.shields.io/badge/Contao%3A-%3E=%204.9.0-orange)](https://github.com/contao/contao/tree/4.9)
 
 Es handelt sich bei dieser Erweiterung für das [Open Source CMS Contao](https://contao.org) um ein Backend Widget, das dem `listWizard` sehr ähnlich ist. Manchmal benötigt man eine Möglichkeit, den Nutzer aus einer bestimmten Anzahl von Optionen beliebig viele auswählen zu lassen. Diese Erweiterung stellt zu diesem Zweck das Widget `selectmenuWizard` zur Verfügung. Es handlet sich hierbei um eine variable Liste an Auswahlfeldern.
 
