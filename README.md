@@ -10,7 +10,7 @@ Die Erweiterung richtet sich an Entwickler, da die Felder im DCA definiert werde
 ## Voraussetzungen
 
 - php: ^7.4||^8.0
-- contao/core-bundle: ^4.9
+- contao/core-bundle: ^4.4
 
 ## Installation
 

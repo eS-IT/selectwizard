@@ -64,7 +64,7 @@ class SelectMenuWizard extends Widget
         }
 
         if (null !== $di) {
-            $di->dispatch($event::NAME, $event);
+            $di->dispatch($event, $event::NAME);
         }
 
         return $event->getOutput();
