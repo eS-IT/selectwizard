@@ -34,7 +34,7 @@ $GLOBALS['TL_DCA'][$table]['palettes']['default'] = '{testfield_legend},testfiel
 /* field */
 $GLOBALS['TL_DCA'][$table]['fields']['testfield'] = [
     'label'     => &$GLOBALS['TL_LANG'][$table]['testfield'],
-    'inputType' => 'selectmenuwizard',
+    'inputType' => 'selectmenuWizard',
     'options'   => [1 => 'Test 001', 2 => 'Test 002'],
     'eval'      => ['tl_class'=>'w50', 'includeBlankOption'=>true],
     'sql'       => 'text NOT NULL'
