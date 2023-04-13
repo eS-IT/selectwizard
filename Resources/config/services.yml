@@ -20,3 +20,5 @@ services:
     Esit\Selectwizard\Classes\Services\SelectHandler:
 
     Esit\Selectwizard\Classes\Services\TemplateFactory:
+
+    Esit\Selectwizard\Classes\Services\WidgetFactory:
