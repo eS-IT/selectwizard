@@ -37,7 +37,7 @@ class OnGenerateWidgetListenerTest extends EsitTestCase
 
 
     /**
-     * @var (SelectHandler&MockObject)|MockObject
+     * @var (TemplateFactory&MockObject)|MockObject
      */
     private $templateFactory;
 
@@ -56,11 +56,19 @@ class OnGenerateWidgetListenerTest extends EsitTestCase
 
     protected function setUp(): void
     {
-        $this->assetHandler     = $this->getMockBuilder(AssetHandler::class)->onlyMethods(['insertAsset'])->getMock();
+        $this->assetHandler     = $this->getMockBuilder(AssetHandler::class)
+                                       ->disableOriginalConstructor()
+                                       ->onlyMethods(['insertAsset'])
+                                       ->getMock();
 
-        $this->selectHandler    = $this->getMockBuilder(SelectHandler::class)->onlyMethods(['createSelect'])->getMock();
+        $this->selectHandler    = $this->getMockBuilder(SelectHandler::class)
+                                       ->disableOriginalConstructor()
+                                       ->onlyMethods(['createSelect'])
+                                       ->getMock();
 
-        $this->templateFactory  = $this->getMockBuilder(TemplateFactory::class)->getMock();
+        $this->templateFactory  = $this->getMockBuilder(TemplateFactory::class)
+                                       ->disableOriginalConstructor()
+                                       ->getMock();
 
         $this->event            = new OnGenerateWidgetEvent();
 
@@ -132,7 +140,7 @@ class OnGenerateWidgetListenerTest extends EsitTestCase
     public function testCreateTemplateIfTemplateNameIsGiven(): void
     {
         $name       = 'test';
-        $template   = $this->getMockBuilder(BackendTemplate::class)->disableOriginalConstructor()->getMock();
+        $template   = $this->mockClassWithProperties(BackendTemplate::class);
 
         $this->templateFactory
             ->expects(self::once())
@@ -156,7 +164,7 @@ class OnGenerateWidgetListenerTest extends EsitTestCase
 
     public function testAddDataToTemplateaSetData(): void
     {
-        $template   = $this->getMockBuilder(BackendTemplate::class)->disableOriginalConstructor()->getMock();
+        $template = $this->mockClassWithProperties(BackendTemplate::class);
 
         $this->event->setTemplate($template);
         $this->event->setFieldId('ctrl_testfield');
@@ -182,7 +190,8 @@ class OnGenerateWidgetListenerTest extends EsitTestCase
 
     public function testParseOutputGeneratesOutput(): void
     {
-        $template = $this->getMockBuilder(BackendTemplate::class)->onlyMethods(['parse'])->getMock();
+        $template = $this->mockClassWithProperties(BackendTemplate::class);
+
         $template->expects($this->once())->method('parse')->willReturn('output');
 
         $this->event->setTemplate($template);

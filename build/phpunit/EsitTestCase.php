@@ -9,7 +9,9 @@
  */
 namespace Esit\Selectwizard;
 
+use Contao\CoreBundle\Framework\ContaoFramework;
 use Contao\TestCase\ContaoTestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Class EsitTestCase
@@ -33,10 +35,16 @@ class EsitTestCase extends ContaoTestCase
 
 
     /**
-     * EsitTestCase constructor.
-     * @param null   $name
-     * @param array  $data
-     * @param string $dataName
+     * @var ContaoFramework&MockObject
+     */
+    protected $framework;
+
+
+    /**
+     * @param $name
+     * @param array $data
+     * @param $dataName
+     * @throws \Exception
      */
     public function __construct($name = null, array $data = [], $dataName = '')
     {
@@ -69,8 +77,8 @@ class EsitTestCase extends ContaoTestCase
      */
     protected function initializeContao($tlMode = 'TEST', $tlScript = 'EsitTestCase'): void
     {
-        $framework = $this->mockContaoFramework();
-        $framework->method('initialize');
+        $this->framework = $this->mockContaoFramework();
+        $this->framework->method('initialize');
 
         if (!defined('TL_MODE')) {
             define('TL_MODE', $tlMode);

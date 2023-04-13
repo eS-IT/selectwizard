@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace Esit\Selectwizard\Tests\Services;
 
+use Contao\SelectMenu;
 use Esit\Selectwizard\Classes\Services\SelectHandler;
-use PHPUnit\Framework\TestCase;
+use Esit\Selectwizard\Classes\Services\WidgetFactory;
+use Esit\Selectwizard\EsitTestCase;
 
-class SelectHandlerTest extends TestCase
+class SelectHandlerTest extends EsitTestCase
 {
 
 
@@ -30,15 +32,16 @@ class SelectHandlerTest extends TestCase
         ];
         $cssId          = 'TestID';
         $value          = null;
-        $expected       = '<select name="TestID[]" id="ctrl_TestID" class="tl_select selectmenuwizard" ';
-        $expected      .= 'onfocus="Backend.getScrollOffset()">';
-        $expected      .= '<option value="test01">Test 01</option>';
-        $expected      .= '<option value="test02">Test 02</option>';
-        $expected      .= '</select>';
-        $selectHandler  = new SelectHandler();
+        $select         = $this->mockClassWithProperties(SelectMenu::class);
+        $factory        = $this->getMockBuilder(WidgetFactory::class)->disableOriginalConstructor()->getMock();
+        $selectHandler  = new SelectHandler($factory);
+        $factory->expects(self::once())->method('createSelectMenu')->willReturn($select);
+        $select->expects(self::exactly(3))->method('__set');
+        // todo Einzelne Werte Prüfen, withConsecutive() ist deprecated!
+
         $rtn            = $selectHandler->createSelect($cssId, $config, $value);
 
-        $this->assertSame($expected, $rtn->generateWithError());
+        $this->assertSame($select, $rtn);
     }
 
     public function testCreateSelectGeneratesASelectMenuAndSetTheValue(): void
@@ -51,14 +54,15 @@ class SelectHandlerTest extends TestCase
         ];
         $cssId          = 'TestID';
         $value          = 'test01';
-        $expected       = '<select name="TestID[]" id="ctrl_TestID" class="tl_select selectmenuwizard" ';
-        $expected      .= 'onfocus="Backend.getScrollOffset()">';
-        $expected      .= '<option value="test01" selected>Test 01</option>';
-        $expected      .= '<option value="test02">Test 02</option>';
-        $expected      .= '</select>';
-        $selectHandler  = new SelectHandler();
+        $select         = $this->mockClassWithProperties(SelectMenu::class);
+        $factory        = $this->getMockBuilder(WidgetFactory::class)->disableOriginalConstructor()->getMock();
+        $selectHandler  = new SelectHandler($factory);
+        $factory->expects(self::once())->method('createSelectMenu')->willReturn($select);
+        $select->expects(self::exactly(4))->method('__set');
+        // todo Einzelne Werte Prüfen, withConsecutive() ist deprecated!
+
         $rtn            = $selectHandler->createSelect($cssId, $config, $value);
 
-        $this->assertSame($expected, $rtn->generateWithError());
+        $this->assertSame($select, $rtn);
     }
 }

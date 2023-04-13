@@ -17,6 +17,14 @@ use Contao\SelectMenu;
 
 class SelectHandler
 {
+
+    /**
+     * @param WidgetFactory $widgetFactory
+     */
+    public function __construct(private WidgetFactory $widgetFactory)
+    {
+    }
+
     /**
      * Erzeugt die einzelnen Auswahlfelder.
      * @param  string     $cssId
@@ -26,7 +34,7 @@ class SelectHandler
      */
     public function createSelect(string $cssId, array $config, mixed $value = null): SelectMenu
     {
-        $select         = new SelectMenu();
+        $select         = $this->widgetFactory->createSelectMenu();
         $select->addAttributes($config);
         $select->name   = $cssId . '[]';
         $select->id     = $cssId;
