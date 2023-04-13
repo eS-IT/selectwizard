@@ -17,7 +17,6 @@ use Contao\SelectMenu;
 
 class SelectHandler
 {
-
     /**
      * @param WidgetFactory $widgetFactory
      */
