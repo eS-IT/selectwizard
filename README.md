@@ -22,7 +22,7 @@ This project is licensed under the LGPLv3 License - see the `LICENSE` file for d
 ## Voraussetzungen
 
 - php: ~8.0
-- contao/core-bundle: ~4.13|^5.1
+- contao/core-bundle: ~4.9|^5.1
 
 
 ## Installation
