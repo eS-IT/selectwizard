@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Esit\Selectwizard\Tests\Events;
 
 use Esit\Selectwizard\Classes\Events\OnGenerateWidgetEvent;
-use Esit\Selectwizard\EsitTestCase;
+use PHPUnit\Framework\TestCase;
 
-class OnGenerateWidgetEventTest extends EsitTestCase
+class OnGenerateWidgetEventTest extends TestCase
 {
 
 

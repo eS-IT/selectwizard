@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Esit\Selectwizard\Tests\Services;
 
 use Esit\Selectwizard\Classes\Services\AssetHandler;
-use Esit\Selectwizard\EsitTestCase;
+use PHPUnit\Framework\TestCase;
 
-class AssetHandlerTest extends EsitTestCase
+class AssetHandlerTest extends TestCase
 {
 
 

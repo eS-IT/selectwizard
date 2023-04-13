@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Esit\Selectwizard\Tests\Services;
 
 use Esit\Selectwizard\Classes\Services\SelectHandler;
-use Esit\Selectwizard\EsitTestCase;
+use PHPUnit\Framework\TestCase;
 
-class SelectHandlerTest extends EsitTestCase
+class SelectHandlerTest extends TestCase
 {
 
 
