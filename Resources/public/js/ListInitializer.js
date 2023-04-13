@@ -1,13 +1,12 @@
 'use strict';
 
 /**
- * @author      pfroch <info@easySolutionsIT.de>
- * @copyright   e@sy Solutions IT 2020
- * @filesource  ListInitializer.js
- * @license     LGPLv3
  * @package     selectwizard
- * @version     1.0.0
- * @since       15.02.20 - 18:07
+ * @since       15.02.20 - 21:32
+ * @author      Patrick Froch <info@easySolutionsIT.de>
+ * @see         http://easySolutionsIT.de
+ * @copyright   e@sy Solutions IT 2020
+ * @license     LGPL-3.0-only
  */
 window.addEventListener("load", function(event) {
     let elements = document.getElementsByClassName('tl_selectmenuwizard');

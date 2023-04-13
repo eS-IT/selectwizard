@@ -1,23 +1,21 @@
-<?php declare(strict_types=1);
+<?php
+
 /**
  * @package     selectwizard
- * @filesource  OnGenerateWidgetEventTest.php
- * @version     1.0.0
  * @since       16.02.20 - 18:42
  * @author      Patrick Froch <info@easySolutionsIT.de>
  * @link        http://easySolutionsIT.de
  * @copyright   e@sy Solutions IT 2020
- * @license     EULA
+ * @license     LGPL-3.0-only
  */
+
+declare(strict_types=1);
+
 namespace Esit\Selectwizard\Tests\Events;
 
 use Esit\Selectwizard\Classes\Events\OnGenerateWidgetEvent;
 use Esit\Selectwizard\EsitTestCase;
 
-/**
- * Class OnGenerateWidgetEventTest
- * @package Esit\Selectwizard\Tests\Events
- */
 class OnGenerateWidgetEventTest extends EsitTestCase
 {
 

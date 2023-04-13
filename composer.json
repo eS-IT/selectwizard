@@ -15,13 +15,11 @@
         "email": "info@easySolutionsIT.de"
     },
     "require": {
-        "php": "^7.4||^8.0",
-        "contao/core-bundle": "^4.4",
-        "contao/manager-bundle": "^4.4",
-        "contao/conflicts": "@dev"
+        "php": "~8.0",
+        "contao/core-bundle": "~4.13|^5.1",
     },
     "require-dev": {
-        "contao/test-case": "^4.5",
+        "contao/test-case": "^4.13",
         "phpunit/phpunit": "^9.5"
     },
     "autoload": {

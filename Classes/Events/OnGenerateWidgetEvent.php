@@ -1,112 +1,103 @@
-<?php declare(strict_types = 1);
+<?php
+
 /**
  * @package     Selectwizard
- * @filesource  OnGenerateWidgetEvent.php
- * @version     1.0.0
  * @since       14.02.2020 - 10:26
  * @author      Patrick Froch <info@easySolutionsIT.de>
  * @see         http://easySolutionsIT.de
  * @copyright   e@sy Solutions IT 2020
- * @license     LGPLv3
+ * @license     LGPL-3.0-only
  */
+
+declare(strict_types=1);
+
 namespace Esit\Selectwizard\Classes\Events;
 
 use Contao\BackendTemplate;
+use Contao\SelectMenu;
 use Symfony\Contracts\EventDispatcher\Event;
 
-/**
- * Class OnGenerateWidgetEvent
- * @package Esit\Selectwizard\Classes\Events
- */
 class OnGenerateWidgetEvent extends Event
 {
-
-
-    /**
-     * Name des Events
-     */
-    public const NAME = 'on.generate.widget.event';
-
-
     /**
      * Liste der CSS-Dateien
-     * @var array
+     * @var string[]
      */
-    protected $tlCss = [];
+    protected array $tlCss = [];
 
 
     /**
      * Liste der JavaScript-Dateien
-     * @var array
+     * @var string[]
      */
-    protected $tlJavascript = [];
+    protected array $tlJavascript = [];
 
 
     /**
-     * Id über dass das Feld angesprochen werden kann
+     * Id über die das Feld angesprochen werden kann
      * @var string
      */
-    protected $fieldId = '';
+    protected string $fieldId = '';
 
 
     /**
      * Label für das Widget
      * @var string
      */
-    protected $label = '';
+    protected string $label = '';
 
 
     /**
      * Werte des Eingabefelds
-     * @var array
+     * @var mixed[]
      */
-    protected $values = [];
+    protected array $values = [];
 
 
     /**
      * Konfiguration des Widgets
-     * @var array
+     * @var string[]
      */
-    protected $configuration = [];
+    protected array $configuration = [];
 
 
     /**
      * Sprachdatei für die Übersetzung
-     * @var array
+     * @var string[]
      */
-    protected $mscLang = [];
+    protected array $mscLang = [];
 
 
     /**
      * Array mit den einzelnen Widgets der Auswahlfelder
-     * @var array
+     * @var SelectMenu[]
      */
-    protected $selects = [];
+    protected array $selects = [];
 
 
     /**
      * Name des Widget-Templates
      * @var string
      */
-    protected $templateName = '';
+    protected string $templateName = '';
 
 
     /**
      * Template-Objekt
-     * @var BackendTemplate
+     * @var ?BackendTemplate
      */
-    protected $template;
+    protected ?BackendTemplate $template = null;
 
 
     /**
      * Output des Widgets
      * @var string
      */
-    protected $output = '';
+    protected string $output = '';
 
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getTlCss(): array
     {
@@ -115,7 +106,7 @@ class OnGenerateWidgetEvent extends Event
 
 
     /**
-     * @param array $tlCss
+     * @param string[] $tlCss
      */
     public function setTlCss(array $tlCss): void
     {
@@ -124,7 +115,7 @@ class OnGenerateWidgetEvent extends Event
 
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getTlJavascript(): array
     {
@@ -133,7 +124,7 @@ class OnGenerateWidgetEvent extends Event
 
 
     /**
-     * @param array $tlJavascript
+     * @param string[] $tlJavascript
      */
     public function setTlJavascript(array $tlJavascript): void
     {
@@ -178,7 +169,7 @@ class OnGenerateWidgetEvent extends Event
 
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function getValues(): array
     {
@@ -187,7 +178,7 @@ class OnGenerateWidgetEvent extends Event
 
 
     /**
-     * @param array $values
+     * @param mixed[] $values
      */
     public function setValues(array $values): void
     {
@@ -196,7 +187,7 @@ class OnGenerateWidgetEvent extends Event
 
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getConfiguration(): array
     {
@@ -205,7 +196,7 @@ class OnGenerateWidgetEvent extends Event
 
 
     /**
-     * @param array $configuration
+     * @param string[] $configuration
      */
     public function setConfiguration(array $configuration): void
     {
@@ -214,7 +205,7 @@ class OnGenerateWidgetEvent extends Event
 
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getMscLang(): array
     {
@@ -223,7 +214,7 @@ class OnGenerateWidgetEvent extends Event
 
 
     /**
-     * @param array $mscLang
+     * @param string[] $mscLang
      */
     public function setMscLang(array $mscLang): void
     {
@@ -232,7 +223,7 @@ class OnGenerateWidgetEvent extends Event
 
 
     /**
-     * @return array
+     * @return SelectMenu[]
      */
     public function getSelects(): array
     {
@@ -241,7 +232,7 @@ class OnGenerateWidgetEvent extends Event
 
 
     /**
-     * @param array $selects
+     * @param SelectMenu[] $selects
      */
     public function setSelects(array $selects): void
     {
@@ -268,7 +259,7 @@ class OnGenerateWidgetEvent extends Event
 
 
     /**
-     * @return BackendTemplate
+     * @return null|BackendTemplate
      */
     public function getTemplate(): ?BackendTemplate
     {

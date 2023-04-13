@@ -1,14 +1,16 @@
-<?php declare(strict_types = 1);
+<?php
+
 /**
  * @package     selectwizard
- * @filesource  EsitSelectwizardExtension.php
- * @version     1.0.0
  * @since       14.02.2020 - 10:26
  * @author      Patrick Froch <info@easySolutionsIT.de>
  * @link        http://easySolutionsIT.de
  * @copyright   e@sy Solutions IT 2020
- * @license     LGPLv3
+ * @license     LGPL-3.0-only
  */
+
+declare(strict_types = 1);
+
 namespace Esit\Selectwizard\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
@@ -16,10 +18,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-/**
- * Class EsitSelectwizardExtension
- * @package Esit\Selectwizard\DependencyInjection
- */
 class EsitSelectwizardExtension extends Extension
 {
 

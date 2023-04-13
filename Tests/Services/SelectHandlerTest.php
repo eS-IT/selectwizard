@@ -1,23 +1,21 @@
-<?php declare(strict_types=1);
+<?php
+
 /**
  * @package     selectwizard
- * @filesource  SelectHandlerTest.php
- * @version     1.0.0
  * @since       16.02.20 - 12:43
  * @author      Patrick Froch <info@easySolutionsIT.de>
  * @link        http://easySolutionsIT.de
  * @copyright   e@sy Solutions IT 2020
- * @license     EULA
+ * @license     LGPL-3.0-only
  */
+
+declare(strict_types=1);
+
 namespace Esit\Selectwizard\Tests\Services;
 
 use Esit\Selectwizard\Classes\Services\SelectHandler;
 use Esit\Selectwizard\EsitTestCase;
 
-/**
- * Class SelectHandlerTest
- * @package Esit\Selectwizard\Tests\Services
- */
 class SelectHandlerTest extends EsitTestCase
 {
 

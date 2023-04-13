@@ -4,16 +4,14 @@
 #title:         runtests.sh
 #description:   Führt die Tests der Softwate aus
 #author:        pfroch <patrick.froch@easySolutionsIT.de>
-#date:          20180819
-#version:       1.0.0
+#date:          20220810
 #usage:         runtests.sh
 # =============================================================================
 #
 
-
 ## Ausgabe
 function myecho() {
-    if [[ "${VERBOSE}" == "TRUE" ]]
+    if [ "${VERBOSE}" == "TRUE" ]
     then
         echo -e "\e[1;96m\n================================================================================"
         echo -e "${1}"
@@ -22,7 +20,7 @@ function myecho() {
 }
 
 function myinfo() {
-    if [[ "${VERBOSE}" == "TRUE" ]]
+    if [ "${VERBOSE}" == "TRUE" ]
     then
         echo -e "\e[0;37m\n================================================================================"
         echo -e "${1}"
@@ -31,7 +29,7 @@ function myinfo() {
 }
 
 function myerror() {
-    if [[ "${VERBOSE}" == "TRUE" ]]
+    if [ "${VERBOSE}" == "TRUE" ]
     then
         echo -e "\n\e[1;91m================================================================================\e[0m"
         echo -e "\e[0;101m\u2717 ${1}\e[0m"
@@ -42,7 +40,7 @@ function myerror() {
 }
 
 function myshortecho() {
-    if [[ "${VERBOSE}" != "TRUE" ]]
+    if [ "${VERBOSE}" != "TRUE" ]
     then
         echo -e "\e[0;92m\u2713 ${1}\e[0m"
     fi
@@ -60,7 +58,7 @@ echo -e "-----------------------------------------------------------------------
 ##
 # Parameters
 ##
-while [[ $# -gt 0 ]]
+while [ $# -gt 0 ]
 do
     case ${1} in
     -v|--verbose)
@@ -80,54 +78,75 @@ done
 ## Variablen
 error=0
 tmperr=0
-configFolder='./build'
+configFolder="$(pwd)/build"
 toolFolder="${configFolder}/tools"
-classesFolder='./Classes'
+classesFolder="$(pwd)/Classes"
 
 
-## php-cs-fixer
-#
-# pfroch - 02.01.2019: doesn't run on php 7.3.x, we have to wait, then:
-# REMOVE: PHP_CS_FIXER_IGNORE_ENV=1
-#
-if [[ -f ${toolFolder}/php-cs-fixer ]]
+## phpcpd
+if [ -f "${toolFolder}/phpcpd" ]
 then
-    myecho "Führe automatische Korrektur der Code-Standards mit Php-cs-fixer durch"
-    if [[ "${VERBOSE}" == "TRUE" ]]
+    myecho "Prüfe auf doppelten Code"
+    if [ "${VERBOSE}" == "TRUE" ]
     then
-        PHP_CS_FIXER_IGNORE_ENV=1 ${toolFolder}/php-cs-fixer --config=${configFolder}/php_cs.dist.php fix
+        "${toolFolder}/phpcpd" "${classesFolder}"
         tmperr=$?
     else
-        PHP_CS_FIXER_IGNORE_ENV=1 ${toolFolder}/php-cs-fixer -q --config=${configFolder}/php_cs.dist.php fix
+        "${toolFolder}/phpcpd" "${classesFolder}" &>/dev/null
         tmperr=$?
     fi
 
-    if [[ ${tmperr} -ne 0 ]]
+    if [ ${tmperr} -ne 0 ]
     then
-       error=${tmperr}
-       myerror "Es ist ein Fehler ausgetreten [${tmperr}]"
+        error=${tmperr}
+        myerror "Bei der Prüfung auf doppelten Code ist ein Fehler ausgetreten [${tmperr}]"
     else
-       myshortecho "Automatische Korrektur der Code-Standards mit Php-cs-fixer erfolgreich"
+       myshortecho "Prüfung auf doppelten Code erfolgreich"
     fi
 else
-   myinfo "Automatische Korrektur der Code-Standards ausgelassen. Php-cs-fixer nicht vorhanden!"
+    myinfo "Prüfen auf doppelten Code ausgelassen. PhpCopyAndPasteDetector nicht vorhanden!"
 fi
 
 
 ## phpcs
-if [[ -f ${toolFolder}/phpcs ]]
+if [ -f "${toolFolder}/phpcbf" ]
 then
-    myecho "Führe statische Code-Analyse mit PHP Codesniffer durch"
-    if [[ "${VERBOSE}" == "TRUE" ]]
+    myecho "Führe statische Code-Verbesserung mit PHP Codesniffer durch"
+    if [ "${VERBOSE}" == "TRUE" ]
     then
-        ${toolFolder}/phpcs --colors --standard=PSR2 ${classesFolder}
+        "${toolFolder}/phpcbf" --colors --standard=PSR12 "${classesFolder}"
         tmperr=$?
     else
-        ${toolFolder}/phpcs -q --colors --standard=PSR2 ${classesFolder}
+        "${toolFolder}/phpcbf" -q --standard=PSR12 "${classesFolder}" &>/dev/null
         tmperr=$?
     fi
 
-    if [[ ${tmperr} -ne 0 ]]
+    if [ ${tmperr} -ne 0 ]
+    then
+        error=${tmperr}
+        myerror "Es ist ein Fehler ausgetreten [${tmperr}]"
+    else
+        myshortecho "Statische Code-Verbesserung mit PHP Codesniffer erfolgreich"
+    fi
+else
+    myinfo "Statische Code-Verbesserung ausgelassen. PHP Codesniffer nicht vorhanden!"
+fi
+
+
+## phpcs
+if [ -f "${toolFolder}/phpcs" ]
+then
+    myecho "Führe statische Code-Analyse mit PHP Codesniffer durch"
+    if [ "${VERBOSE}" == "TRUE" ]
+    then
+        "${toolFolder}/phpcs" --colors --standard=PSR12 "${classesFolder}"
+        tmperr=$?
+    else
+        "${toolFolder}/phpcs" -q --standard=PSR12 "${classesFolder}"
+        tmperr=$?
+    fi
+
+    if [ ${tmperr} -ne 0 ]
     then
         error=${tmperr}
         myerror "Es ist ein Fehler ausgetreten [${tmperr}]"
@@ -139,66 +158,56 @@ else
 fi
 
 
-## phan
-#if [[ -f ${toolFolder}/phan ]]
-#then
-#    myecho "Führe statische Code-Analyse mit Phan durch"
-#    if [[ "${VERBOSE}" == "TRUE" ]]
-#    then
-#        ${toolFolder}/phan --allow-polyfill-parser --ignore-undeclared --output-mode text --color --progress-bar --backward-compatibility-checks --dead-code-detection --unused-variable-detection --signature-compatibility --strict-type-checking --directory ${classesFolder}
-#        tmperr=$?
-#    else
-#        ${toolFolder}/phan --allow-polyfill-parser --ignore-undeclared --output-mode text --color --progress-bar --backward-compatibility-checks --dead-code-detection --unused-variable-detection --signature-compatibility --strict-type-checking --directory ${classesFolder} 1>/dev/null
-#        tmperr=$?
-#    fi
-#
-#    if [[ ${tmperr} -ne 0 ]]
-#    then
-#        error=${tmperr}
-#        myerror "Es ist ein Fehler ausgetreten [${tmperr}]"
-#    fi
-#else
-#    myinfo "Statische Code-Analyse ausgelassen. Phan nicht vorhanden!"
-#fi
+## PHPStan
+if [ -f "${toolFolder}/phpcpd" ]
+then
+    myecho "Prüfe Code-Qualität mit PHPStan"
 
-echo
+    if [ "${VERBOSE}" == "TRUE" ]
+    then
+        "${toolFolder}/phpstan" analyse -c "${configFolder}/phpstan.neon"
+        tmperr=$?
+    else
+        "${toolFolder}/phpstan" analyse -q -c "${configFolder}/phpstan.neon"
+        tmperr=$?
+    fi
+
+    if [ ${tmperr} -ne 0 ]
+    then
+        error=${tmperr}
+        "${toolFolder}/phpstan" analyse -c "${configFolder}/phpstan.neon"
+    else
+       myshortecho "Prüfen Code-Qualität mit PHPStan erfolgreich"
+    fi
+else
+    myinfo "Prüfen Code-Qualität mit PHPStan ausgelassen. PHPStan nicht vorhanden!"
+fi
+
 
 ## PHPUnit
-if [[ -f ${toolFolder}/phpunit ]]
+if [ -f ../../../vendor/bin/phpunit ] && [ -d ./Tests ]
 then
-    # PHPUnit als Phar in build installiert
-    myecho "Führe UnitTests mit Phar PHPUnit durch"
-    ${toolFolder}/phpunit --configuration ${configFolder}/phpunit/phpunit.xml.dist --testdox
+    # PHPUnit gobal mit composer installiert
+    echo
+    myecho "Führe UnitTests mit globalem PHPUnit durch"
+    XDEBUG_MODE=coverage ../../../vendor/bin/phpunit --configuration "${configFolder}/phpunit/phpunit.xml.dist" --testdox
     tmperr=$?
 
-    if [[ ${tmperr} -ne 0 ]]
+    if [ ${tmperr} -ne 0 ]
     then
         error=${tmperr}
         myerror "Es ist ein Fehler ausgetreten [${tmperr}]"
     fi
 else
-    if [[ -f ../../../vendor/bin/phpunit ]]
-    then
-        # PHPUnit gobal mit composer installiert
-        myecho "Führe UnitTests mit globalem PHPUnit durch"
-        ../../../vendor/bin/phpunit --configuration ${configFolder}/phpunit/phpunit.xml.dist --testdox
-        tmperr=$?
-
-        if [[ ${tmperr} -ne 0 ]]
-        then
-            error=${tmperr}
-            myerror "Es ist ein Fehler ausgetreten [${tmperr}]"
-        fi
-    else
-        myinfo "Ausführen der UnitTests ausgelassen. PHPUnit nicht vorhanden!"
-    fi
+    myinfo "Ausführen der UnitTests ausgelassen. PHPUnit nicht vorhanden!"
 fi
 
+echo
 
 ## Zusammenfassung
-if [[ ${error} -ne 0 ]]
+if [ ${error} -ne 0 ]
 then
-    if [[ "${VERBOSE}" != "TRUE" ]]
+    if [ "${VERBOSE}" != "TRUE" ]
     then
         echo
     fi
@@ -211,3 +220,4 @@ else
     echo
     exit 0
 fi
+

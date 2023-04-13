@@ -11,12 +11,10 @@
 
 # Services
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: tru
 
-    ##
-    # Hanlder
-    ##
-    esit_selectwizard.services.asset_handler:
-        class: Esit\Selectwizard\Classes\Services\AssetHandler
+    Esit\Selectwizard\Classes\Services\AssetHandler:
 
-    esit_selectwizard.services.select_handler:
-        class: Esit\Selectwizard\Classes\Services\SelectHandler
+    Esit\Selectwizard\Classes\Services\SelectHandler:

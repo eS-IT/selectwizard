@@ -1,27 +1,25 @@
-<?php declare(strict_types = 1);
+<?php
+
 /**
  * @package     selectwizard
- * @filesource  SelectMenuWizard.php
- * @version     1.0.0
  * @since       14.02.20 - 16:34
  * @author      Patrick Froch <info@easySolutionsIT.de>
- * @see        http://easySolutionsIT.de
+ * @see         http://easySolutionsIT.de
  * @copyright   e@sy Solutions IT 2020
- * @license     LGPLv3
+ * @license     LGPL-3.0-only
  */
+
+declare(strict_types=1);
+
 namespace Esit\Selectwizard\Classes\Contao\Widget;
 
 use Contao\System;
 use Contao\Widget;
 use Esit\Selectwizard\Classes\Events\OnGenerateWidgetEvent;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
-/**
- * Class SelectMenuWizard
- * @package Esit\Selectwizard\Classes\Contao\Widget
- */
 class SelectMenuWizard extends Widget
 {
-
     /**
      * Submit user input
      * @var bool
@@ -40,14 +38,15 @@ class SelectMenuWizard extends Widget
      * Name des Ausgabetemplates
      * @var string
      */
-    protected $widgetTemplate = 'be_select_menu_wizard';
+    protected string $widgetTemplate = 'be_select_menu_wizard';
 
 
     /**
      * @return string
      */
-    public function generate()
+    public function generate(): string
     {
+        /** @var EventDispatcherInterface $di */
         $di     = System::getContainer()->get('event_dispatcher');
         $event  = new OnGenerateWidgetEvent();
 
@@ -64,7 +63,7 @@ class SelectMenuWizard extends Widget
         }
 
         if (null !== $di) {
-            $di->dispatch($event, $event::NAME);
+            $di->dispatch($event);
         }
 
         return $event->getOutput();

@@ -1,16 +1,29 @@
 # SelectWizard
 
-[![LGPLv3](https://img.shields.io/badge/license-LGPLv3-blue)](https://choosealicense.com/licenses/gpl-3.0/) [![PHP >7.4](https://img.shields.io/badge/PHP%3A-%20%3E7.4.0-blue)](https://www.php.net/downloads.php#v7.4.26) [![Contao >4.9](https://img.shields.io/badge/Contao%3A-%3E=%204.9.0-orange)](https://github.com/contao/contao/tree/4.9)
+![LGPLv3](https://img.shields.io/badge/license-LGPLv3-blue)
+![PHP >7.4](https://img.shields.io/badge/PHP%3A-%20%3E7.4.0-blue)
+![Contao >4.9](https://img.shields.io/badge/Contao%3A-%3E=%204.9.0-orange)
 
 Es handelt sich bei dieser Erweiterung für das [Open Source CMS Contao](https://contao.org) um ein Backend Widget, das dem `listWizard` sehr ähnlich ist. Manchmal benötigt man eine Möglichkeit, den Nutzer aus einer bestimmten Anzahl von Optionen beliebig viele auswählen zu lassen. Diese Erweiterung stellt zu diesem Zweck das Widget `selectmenuWizard` zur Verfügung. Es handlet sich hierbei um eine variable Liste an Auswahlfeldern.
 
 Die Erweiterung richtet sich an Entwickler, da die Felder im DCA definiert werden müssen. Es können die gängigen Einstellungen vorgenommen werden, die Contao für das DCA vorsieht.
 
 
+## Autor
+
+__e@sy Solutions IT:__ Patrick Froch <info@easySolutionsIT.de>
+
+
+## Lizenz
+
+This project is licensed under the LGPLv3 License - see the `LICENSE` file for details
+
+
 ## Voraussetzungen
 
-- php: ^7.4||^8.0
-- contao/core-bundle: ^4.4
+- php: ~8.0
+- contao/core-bundle: ~4.13|^5.1
+
 
 ## Installation
 
@@ -47,7 +60,7 @@ __Einschränkungen:__
 
 ### Ausgabe
 
-![Ausgabe](https://github.com/eS-IT/selectwizard/blob/master/selectboxwizard_output.png?raw=true "Ausgabe")
+![Ausgabe](https://github.com/eS-IT/selectwizard/blob/master/selectboxwizard_output.png?raw=true)
 
 
 ## Running the tests
@@ -57,13 +70,3 @@ Im Verzeichnis der Erweiterung folgendes aufrufen:
 ```bash
 $> build/runtest.sh
 ```
-
-
-## Autor
-
-__e@sy Solutions IT:__ Patrick Froch <info@easySolutionsIT.de>
-
-
-## Lizenz
-
-This project is licensed under the LGPLv3 License - see the `LICENSE` file for details

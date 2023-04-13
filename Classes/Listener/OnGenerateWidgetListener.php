@@ -1,14 +1,16 @@
-<?php declare(strict_types = 1);
+<?php
+
 /**
  * @package     selectwizard
- * @filesource  OnGenerateWidgetListener.php
- * @version     1.0.0
  * @since       16.02.20 - 10:08
  * @author      Patrick Froch <info@easySolutionsIT.de>
  * @see         http://easySolutionsIT.de
  * @copyright   e@sy Solutions IT 2020
- * @license     LGPLv3
+ * @license     LGPL-3.0-only
  */
+
+declare(strict_types=1);
+
 namespace Esit\Selectwizard\Classes\Listener;
 
 use Contao\BackendTemplate;
@@ -16,35 +18,15 @@ use Esit\Selectwizard\Classes\Events\OnGenerateWidgetEvent;
 use Esit\Selectwizard\Classes\Services\AssetHandler;
 use Esit\Selectwizard\Classes\Services\SelectHandler;
 
-/**
- * Class OnGenerateWidgetListener
- * @package Esit\Selectwizard\Classes\Listener
- */
 class OnGenerateWidgetListener
 {
-
-
-    /**
-     * @var AssetHandler
-     */
-    protected $assetHandler;
-
-
-    /**
-     * @var SelectHandler
-     */
-    protected $selectHandler;
-
-
     /**
      * OnGenerateWidgetListener constructor.
      * @param AssetHandler  $assetHandler
      * @param SelectHandler $selectHandler
      */
-    public function __construct(AssetHandler $assetHandler, SelectHandler $selectHandler)
+    public function __construct(private AssetHandler $assetHandler, private SelectHandler $selectHandler)
     {
-        $this->assetHandler     = $assetHandler;
-        $this->selectHandler    = $selectHandler;
     }
 
 
@@ -77,7 +59,7 @@ class OnGenerateWidgetListener
 
 
     /**
-     * Erstellt das Initiale Widget, wenn noch keine Werte vorhanden sind.
+     * Erstellt das initiale Widget, wenn noch keine Werte vorhanden sind.
      * @param OnGenerateWidgetEvent $event
      */
     public function generateWidgets(OnGenerateWidgetEvent $event): void
@@ -124,10 +106,10 @@ class OnGenerateWidgetListener
 
         if (null !== $template) {
             $template->setData($event->getConfiguration());
-            $template->strId       = \str_replace('ctrl_', '', $event->getFieldId()) . '_list';
-            $template->label       = $event->getLabel();
-            $template->lang        = $event->getMscLang();
-            $template->selectBoxes = $event->getSelects();
+            $template->strId       = \str_replace('ctrl_', '', $event->getFieldId()) . '_list'; // @phpstan-ignore-line
+            $template->label       = $event->getLabel();    // @phpstan-ignore-line
+            $template->lang        = $event->getMscLang();  // @phpstan-ignore-line
+            $template->selectBoxes = $event->getSelects();  // @phpstan-ignore-line
         }
     }
 

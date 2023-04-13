@@ -1,37 +1,33 @@
-<?php declare(strict_types = 1);
+<?php
+
 /**
  * @package     selectwizard
- * @filesource  Plugin.php
- * @version     1.0.0
  * @since       14.02.2020 - 10:26
  * @author      Patrick Froch <info@easySolutionsIT.de>
- * @see        http://easySolutionsIT.de
+ * @see         http://easySolutionsIT.de
  * @copyright   e@sy Solutions IT 2020
- * @license     LGPLv3
+ * @license     LGPL-3.0-only
  */
+
+declare(strict_types=1);
+
 namespace Esit\Selectwizard\Classes\Contao\Manager;
 
+use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
+use Contao\ManagerPlugin\Bundle\Config\ConfigInterface;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
+use Esit\Selectwizard\EsitSelectwizardBundle;
 
-/**
- * Class Plugin
- * @package Esit\Selectwizard\Classes\Contao\Manager
- */
 class Plugin implements BundlePluginInterface
 {
-
-
     /**
-     * @param  ParserInterface                                             $parser
-     * @return array|\Contao\ManagerPlugin\Bundle\Config\ConfigInterface[]
+     * @param ParserInterface $parser
+     * @return array|ConfigInterface[]
      */
-    public function getBundles(ParserInterface $parser)
+    public function getBundles(ParserInterface $parser): array
     {
-        return [
-            BundleConfig::create(\Esit\Selectwizard\EsitSelectwizardBundle::class)
-                ->setLoadAfter([\Contao\CoreBundle\ContaoCoreBundle::class])
-        ];
+        return [BundleConfig::create(EsitSelectwizardBundle::class)->setLoadAfter([ContaoCoreBundle::class])];
     }
 }

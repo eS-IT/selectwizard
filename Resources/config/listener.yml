@@ -1,55 +1,17 @@
-##
-# @package     selectwizard
-# @filesource  listener.yml
-# @version     1.0.0
-# @since       14.02.2020 - 10:26
-# @author      Patrick Froch <info@easySolutionsIT.de>
-# @link        http://easySolutionsIT.de
-# @copyright   e@sy Solutions IT 2020
-# @license     LGPLv3
-##
-
-# EventListener
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
 
-    ##
     # OnGenerateWidgetListener
-    ##
-    esit_selectwizard.listener.on_generate_widget_listener.insert_css:
-        class: Esit\Selectwizard\Classes\Listener\OnGenerateWidgetListener
-        arguments: ["@esit_selectwizard.services.asset_handler", "@esit_selectwizard.services.select_handler"]
+    Esit\Selectwizard\Classes\Listener\OnGenerateWidgetListener:
         tags:
-            - { name: kernel.event_listener, event: on.generate.widget.event, method: insertCss, priority: 7168 }
-
-    esit_selectwizard.listener.on_generate_widget_listener.insert_js:
-        class: Esit\Selectwizard\Classes\Listener\OnGenerateWidgetListener
-        arguments: ["@esit_selectwizard.services.asset_handler", "@esit_selectwizard.services.select_handler"]
-        tags:
-            - { name: kernel.event_listener, event: on.generate.widget.event, method: insertJs, priority: 6144 }
-
-    esit_selectwizard.listener.on_generate_widget_listener.generate_widgets:
-        class: Esit\Selectwizard\Classes\Listener\OnGenerateWidgetListener
-        arguments: ["@esit_selectwizard.services.asset_handler", "@esit_selectwizard.services.select_handler"]
-        tags:
-            - { name: kernel.event_listener, event: on.generate.widget.event, method: generateWidgets, priority: 5120 }
-
-    esit_selectwizard.listener.on_generate_widget_listener.create_template:
-        class: Esit\Selectwizard\Classes\Listener\OnGenerateWidgetListener
-        arguments: ["@esit_selectwizard.services.asset_handler", "@esit_selectwizard.services.select_handler"]
-        tags:
-            - { name: kernel.event_listener, event: on.generate.widget.event, method: createTemplate, priority: 3072 }
-
-    esit_selectwizard.listener.on_generate_widget_listener.add_data_to_template:
-        class: Esit\Selectwizard\Classes\Listener\OnGenerateWidgetListener
-        arguments: ["@esit_selectwizard.services.asset_handler", "@esit_selectwizard.services.select_handler"]
-        tags:
-            - { name: kernel.event_listener, event: on.generate.widget.event, method: addDataToTemplate, priority: 2048 }
-
-    esit_selectwizard.listener.on_generate_widget_listener.parse_output:
-        class: Esit\Selectwizard\Classes\Listener\OnGenerateWidgetListener
-        arguments: ["@esit_selectwizard.services.asset_handler", "@esit_selectwizard.services.select_handler"]
-        tags:
-            - { name: kernel.event_listener, event: on.generate.widget.event, method: parseOutput, priority: 1024 }
+            - { name: kernel.event_listener, event: Esit\Selectwizard\Classes\Events\OnGenerateWidgetEvent, method: insertCss, priority: 7168 }
+            - { name: kernel.event_listener, event: Esit\Selectwizard\Classes\Events\OnGenerateWidgetEvent, method: insertJs, priority: 6144 }
+            - { name: kernel.event_listener, event: Esit\Selectwizard\Classes\Events\OnGenerateWidgetEvent, method: generateWidgets, priority: 5120 }
+            - { name: kernel.event_listener, event: Esit\Selectwizard\Classes\Events\OnGenerateWidgetEvent, method: createTemplate, priority: 3072 }
+            - { name: kernel.event_listener, event: Esit\Selectwizard\Classes\Events\OnGenerateWidgetEvent, method: addDataToTemplate, priority: 2048 }
+            - { name: kernel.event_listener, event: Esit\Selectwizard\Classes\Events\OnGenerateWidgetEvent, method: parseOutput, priority: 1024 }
 
 
 

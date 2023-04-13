@@ -1,13 +1,3 @@
-/**
- * @author      pfroch <info@easySolutionsIT.de>
- * @copyright   e@sy Solutions IT 2020
- * @filesource  selectfix.css
- * @license     LGPLv3
- * @package     selectwizard
- * @version     1.0.0
- * @since       15.02.20 - 18:07
- */
-
 .w50 .tl_selectmenuwizard .selectmenuwizard{
     width: 85%;
 }

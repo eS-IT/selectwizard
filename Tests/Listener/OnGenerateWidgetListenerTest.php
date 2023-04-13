@@ -1,14 +1,15 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * @package     selectwizard
- * @filesource  OnGenerateWidgetListenerTest.php
- * @version     1.0.0
  * @since       16.02.20 - 13:16
  * @author      Patrick Froch <info@easySolutionsIT.de>
  * @link        http://easySolutionsIT.de
  * @copyright   e@sy Solutions IT 2020
- * @license     EULA
+ * @license     LGPL-3.0-only
  */
+
+declare(strict_types=1);
+
 namespace Esit\Selectwizard\Tests\Listener;
 
 use Contao\BackendTemplate;
@@ -18,10 +19,6 @@ use Esit\Selectwizard\Classes\Services\AssetHandler;
 use Esit\Selectwizard\Classes\Services\SelectHandler;
 use Esit\Selectwizard\EsitTestCase;
 
-/**
- * Class OnGenerateWidgetListenerTest
- * @package Esit\Selectwizard\Tests\Listener
- */
 class OnGenerateWidgetListenerTest extends EsitTestCase
 {
 
