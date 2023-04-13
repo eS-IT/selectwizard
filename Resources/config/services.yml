@@ -18,3 +18,5 @@ services:
     Esit\Selectwizard\Classes\Services\AssetHandler:
 
     Esit\Selectwizard\Classes\Services\SelectHandler:
+
+    Esit\Selectwizard\Classes\Services\TemplateFactory:

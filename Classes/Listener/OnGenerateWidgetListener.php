@@ -17,6 +17,7 @@ use Contao\BackendTemplate;
 use Esit\Selectwizard\Classes\Events\OnGenerateWidgetEvent;
 use Esit\Selectwizard\Classes\Services\AssetHandler;
 use Esit\Selectwizard\Classes\Services\SelectHandler;
+use Esit\Selectwizard\Classes\Services\TemplateFactory;
 
 class OnGenerateWidgetListener
 {
@@ -25,8 +26,11 @@ class OnGenerateWidgetListener
      * @param AssetHandler  $assetHandler
      * @param SelectHandler $selectHandler
      */
-    public function __construct(private AssetHandler $assetHandler, private SelectHandler $selectHandler)
-    {
+    public function __construct(
+        private AssetHandler $assetHandler,
+        private SelectHandler $selectHandler,
+        private TemplateFactory $templateFactory
+    ) {
     }
 
 
@@ -90,7 +94,7 @@ class OnGenerateWidgetListener
         $name = $event->getTemplateName();
 
         if (!empty($name)) {
-            $template = new BackendTemplate($name);
+            $template = $this->templateFactory->createBackendTemplate($name);
             $event->setTemplate($template);
         }
     }
@@ -120,11 +124,10 @@ class OnGenerateWidgetListener
      */
     public function parseOutput(OnGenerateWidgetEvent $event): void
     {
-        $template   = $event->getTemplate();
+        $template = $event->getTemplate();
 
         if (null !== $template) {
-            $output = $template->parse();
-            $event->setOutput($output);
+            $event->setOutput($template->parse());
         }
     }
 }

@@ -17,168 +17,176 @@ use Esit\Selectwizard\Classes\Events\OnGenerateWidgetEvent;
 use Esit\Selectwizard\Classes\Listener\OnGenerateWidgetListener;
 use Esit\Selectwizard\Classes\Services\AssetHandler;
 use Esit\Selectwizard\Classes\Services\SelectHandler;
+use Esit\Selectwizard\Classes\Services\TemplateFactory;
 use Esit\Selectwizard\EsitTestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class OnGenerateWidgetListenerTest extends EsitTestCase
 {
 
+    /**
+     * @var (AssetHandler&MockObject)|MockObject
+     */
+    private $assetHandler;
+
+
+    /**
+     * @var (SelectHandler&MockObject)|MockObject
+     */
+    private $selectHandler;
+
+
+    /**
+     * @var (SelectHandler&MockObject)|MockObject
+     */
+    private $templateFactory;
+
+
+    /**
+     * @var OnGenerateWidgetEvent
+     */
+    private $event;
+
+
+    /**
+     * @var OnGenerateWidgetListener
+     */
+    private $listener;
+
+
+    protected function setUp(): void
+    {
+        $this->assetHandler     = $this->getMockBuilder(AssetHandler::class)->onlyMethods(['insertAsset'])->getMock();
+
+        $this->selectHandler    = $this->getMockBuilder(SelectHandler::class)->onlyMethods(['createSelect'])->getMock();
+
+        $this->templateFactory  = $this->getMockBuilder(TemplateFactory::class)->getMock();
+
+        $this->event            = new OnGenerateWidgetEvent();
+
+        $this->listener         = new OnGenerateWidgetListener(
+            $this->assetHandler,
+            $this->selectHandler,
+            $this->templateFactory
+        );
+    }
 
     public function testInsertCssDoNothingIfCssArrayIsEmpty(): void
     {
-        $ah         = $this->getMockBuilder(AssetHandler::class)->onlyMethods(['insertAsset'])->getMock();
-        $sh         = $this->getMockBuilder(SelectHandler::class)->onlyMethods(['createSelect'])->getMock();
-        $ah->expects($this->never())->method('insertAsset');
-        $listener   = new OnGenerateWidgetListener($ah, $sh);
-        $event      = new OnGenerateWidgetEvent();
-        $listener->insertCss($event);
+        $this->assetHandler->expects($this->never())->method('insertAsset');
+        $this->listener->insertCss($this->event);
     }
 
 
     public function testInsertCssCallsInsertAssetIfCssArrayIsSet(): void
     {
-        $css        = ['/tmp/css/one', '/tmp/css/two', '/tmp/css/three'];
-        $ah         = $this->getMockBuilder(AssetHandler::class)->onlyMethods(['insertAsset'])->getMock();
-        $sh         = $this->getMockBuilder(SelectHandler::class)->onlyMethods(['createSelect'])->getMock();
-        $ah->expects($this->exactly(\count($css)))->method('insertAsset');
-        $listener   = new OnGenerateWidgetListener($ah, $sh);
-        $event      = new OnGenerateWidgetEvent();
-        $event->setTlCss($css);
-        $listener->insertCss($event);
+        $css = ['/tmp/css/one', '/tmp/css/two', '/tmp/css/three'];
+        $this->assetHandler->expects($this->exactly(\count($css)))->method('insertAsset');
+        $this->event->setTlCss($css);
+        $this->listener->insertCss($this->event);
     }
 
 
     public function testInsertJsDoNothingInJsArrayIsEmpty(): void
     {
-        $ah         = $this->getMockBuilder(AssetHandler::class)->onlyMethods(['insertAsset'])->getMock();
-        $sh         = $this->getMockBuilder(SelectHandler::class)->onlyMethods(['createSelect'])->getMock();
-        $ah->expects($this->never())->method('insertAsset');
-        $listener   = new OnGenerateWidgetListener($ah, $sh);
-        $event      = new OnGenerateWidgetEvent();
-        $listener->insertJs($event);
+        $this->assetHandler->expects($this->never())->method('insertAsset');
+        $this->listener->insertJs($this->event);
     }
 
 
     public function testInsertJsCallsInserTAssetsIfJsArrayIsSet(): void
     {
-        $js        = ['/tmp/js/one', '/tmp/js/two', '/tmp/js/three'];
-        $ah         = $this->getMockBuilder(AssetHandler::class)->onlyMethods(['insertAsset'])->getMock();
-        $sh         = $this->getMockBuilder(SelectHandler::class)->onlyMethods(['createSelect'])->getMock();
-        $ah->expects($this->exactly(\count($js)))->method('insertAsset');
-        $listener   = new OnGenerateWidgetListener($ah, $sh);
-        $event      = new OnGenerateWidgetEvent();
-        $event->setTlJavascript($js);
-        $listener->insertJs($event);
+        $js = ['/tmp/js/one', '/tmp/js/two', '/tmp/js/three'];
+        $this->assetHandler->expects($this->exactly(\count($js)))->method('insertAsset');
+        $this->event->setTlJavascript($js);
+        $this->listener->insertJs($this->event);
     }
 
 
     public function testGenerateWidgetsCallsCreateSelectWithoutValueIfValuesAreEmpty(): void
     {
-        $ah         = $this->getMockBuilder(AssetHandler::class)->onlyMethods(['insertAsset'])->getMock();
-        $sh         = $this->getMockBuilder(SelectHandler::class)->onlyMethods(['createSelect'])->getMock();
-        $sh->expects($this->once())->method('createSelect')->with('test', ['test']);
-        $listener   = new OnGenerateWidgetListener($ah, $sh);
-        $event      = new OnGenerateWidgetEvent();
-        $event->setFieldId('test');
-        $event->setConfiguration(['test']);
-        $listener->generateWidgets($event);
+        $this->selectHandler->expects($this->once())->method('createSelect')->with('test', ['test']);
+        $this->event->setFieldId('test');
+        $this->event->setConfiguration(['test']);
+        $this->listener->generateWidgets($this->event);
     }
 
 
     public function testGenerateWidgetsCallsCreateSelectIfValuesAreSet(): void
     {
-        $values     = ['one', 'two'];
-        $ah         = $this->getMockBuilder(AssetHandler::class)->onlyMethods(['insertAsset'])->getMock();
-        $sh         = $this->getMockBuilder(SelectHandler::class)->onlyMethods(['createSelect'])->getMock();
-        $sh->expects($this->exactly(\count($values)))->method('createSelect');
-        $listener   = new OnGenerateWidgetListener($ah, $sh);
-        $event      = new OnGenerateWidgetEvent();
-        $event->setValues($values);
-        $listener->generateWidgets($event);
+        $values = ['one', 'two'];
+        $this->selectHandler->expects($this->exactly(\count($values)))->method('createSelect');
+        $this->event->setValues($values);
+        $this->listener->generateWidgets($this->event);
     }
 
 
     public function testCreateTemplateDoNothingIfTemplateNameIsNotGiven(): void
     {
-        $ah         = $this->getMockBuilder(AssetHandler::class)->onlyMethods(['insertAsset'])->getMock();
-        $sh         = $this->getMockBuilder(SelectHandler::class)->onlyMethods(['createSelect'])->getMock();
-        $listener   = new OnGenerateWidgetListener($ah, $sh);
-        $event      = new OnGenerateWidgetEvent();
-        $listener->createTemplate($event);
-        $rtn        = $event->getTemplate();
-        $this->assertEmpty($rtn);
+        $this->templateFactory->expects(self::never())->method('createBackendTemplate');
+        $this->listener->createTemplate($this->event);
+        self::assertEmpty($this->event->getTemplate());
     }
 
 
     public function testCreateTemplateIfTemplateNameIsGiven(): void
     {
-        $ah         = $this->getMockBuilder(AssetHandler::class)->onlyMethods(['insertAsset'])->getMock();
-        $sh         = $this->getMockBuilder(SelectHandler::class)->onlyMethods(['createSelect'])->getMock();
-        $listener   = new OnGenerateWidgetListener($ah, $sh);
-        $event      = new OnGenerateWidgetEvent();
-        $event->setTemplateName('test');
-        $listener->createTemplate($event);
-        $rtn        = $event->getTemplate();
-        $this->assertInstanceOf(BackendTemplate::class, $rtn);
+        $name       = 'test';
+        $template   = $this->getMockBuilder(BackendTemplate::class)->disableOriginalConstructor()->getMock();
+
+        $this->templateFactory
+            ->expects(self::once())
+            ->method('createBackendTemplate')
+            ->with($name)
+            ->willReturn($template);
+
+        $this->event->setTemplateName($name);
+        $this->listener->createTemplate($this->event);
+        self::assertSame($template, $this->event->getTemplate());
     }
 
 
     public function testAddDataToTemplateaDoNothingIfTmeplateIsNull(): void
     {
-        $ah         = $this->getMockBuilder(AssetHandler::class)->onlyMethods(['insertAsset'])->getMock();
-        $sh         = $this->getMockBuilder(SelectHandler::class)->onlyMethods(['createSelect'])->getMock();
-        $listener   = new OnGenerateWidgetListener($ah, $sh);
-        $event      = new OnGenerateWidgetEvent();
-        $listener->addDataToTemplate($event);
-        $template   = $event->getTemplate();
-        $this->assertEmpty($template);
+        $this->listener->addDataToTemplate($this->event);
+        $template = $this->event->getTemplate();
+        self::assertEmpty($template);
     }
 
 
     public function testAddDataToTemplateaSetData(): void
     {
-        $ah         = $this->getMockBuilder(AssetHandler::class)->onlyMethods(['insertAsset'])->getMock();
-        $sh         = $this->getMockBuilder(SelectHandler::class)->onlyMethods(['createSelect'])->getMock();
-        $listener   = new OnGenerateWidgetListener($ah, $sh);
-        $event      = new OnGenerateWidgetEvent();
-        $template   = new BackendTemplate('test_dummy');
-        $event->setTemplate($template);
-        $event->setFieldId('ctrl_testfield');
-        $event->setLabel('testfield');
-        $event->setMscLang(['Language']);
-        $listener->addDataToTemplate($event);
-        $template = $event->getTemplate();
-        $this->assertSame('testfield_list', $template->strId);
-        $this->assertSame('testfield', $template->label);
-        $this->assertSame(['Language'], $template->lang);
+        $template   = $this->getMockBuilder(BackendTemplate::class)->disableOriginalConstructor()->getMock();
+
+        $this->event->setTemplate($template);
+        $this->event->setFieldId('ctrl_testfield');
+        $this->event->setLabel('testfield');
+        $this->event->setMscLang(['Language']);
+        $this->event->setConfiguration(['config']);
+
+        $matcher = self::exactly(4);
+        $template->expects(self::once())->method('setData')->with(['config']);
+        $template->expects($matcher)->method('__set');
+        // todo Einzelne Werte Prüfen, withConsecutive() ist deprecated!
+
+        $this->listener->addDataToTemplate($this->event);
     }
 
 
     public function testParseOutputDoNothingIfTemplateIsNull(): void
     {
-        $ah         = $this->getMockBuilder(AssetHandler::class)->onlyMethods(['insertAsset'])->getMock();
-        $sh         = $this->getMockBuilder(SelectHandler::class)->onlyMethods(['createSelect'])->getMock();
-
-        $listener   = new OnGenerateWidgetListener($ah, $sh);
-        $event      = new OnGenerateWidgetEvent();
-        $listener->parseOutput($event);
-        $output    = $event->getOutput();
-        $this->assertEmpty($output);
+        $this->listener->parseOutput($this->event);
+        self::assertEmpty($this->event->getOutput());
     }
 
 
     public function testParseOutputGeneratesOutput(): void
     {
-        $ah         = $this->getMockBuilder(AssetHandler::class)->onlyMethods(['insertAsset'])->getMock();
-        $sh         = $this->getMockBuilder(SelectHandler::class)->onlyMethods(['createSelect'])->getMock();
-        $template   = $this->getMockBuilder(BackendTemplate::class)->onlyMethods(['parse'])->getMock();
-
+        $template = $this->getMockBuilder(BackendTemplate::class)->onlyMethods(['parse'])->getMock();
         $template->expects($this->once())->method('parse')->willReturn('output');
 
-        $listener   = new OnGenerateWidgetListener($ah, $sh);
-        $event      = new OnGenerateWidgetEvent();
-
-        $event->setTemplate($template);
-        $listener->parseOutput($event);
-        $this->assertSame('output', $event->getOutput());
+        $this->event->setTemplate($template);
+        $this->listener->parseOutput($this->event);
+        self::assertSame('output', $this->event->getOutput());
     }
 }
