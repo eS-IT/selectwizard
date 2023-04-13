@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Esit\Selectwizard\Tests\Services;
 
 use Esit\Selectwizard\Classes\Services\TemplateFactory;
-use PHPUnit\Framework\TestCase;
+use Esit\Selectwizard\EsitTestCase;
 
-class TemplateFactoryTest extends TestCase
+class TemplateFactoryTest extends EsitTestCase
 {
 
     public function testCreateBackendTemplate(): void
