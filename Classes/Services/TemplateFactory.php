@@ -21,6 +21,7 @@ class TemplateFactory
      * Erstellt ein BackendTemplate.
      * @param string $name
      * @return BackendTemplate
+     * @codeCoverageIgnore
      */
     public function createBackendTemplate(string $name): BackendTemplate
     {
